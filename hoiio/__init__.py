@@ -17,7 +17,7 @@ class Hoiio(object):
 
     # Services as class attributes
     voice = service.voice.Voice()
-    # sms = service.sms.Sms()
+    sms = service.sms.Sms()
     # fax = service.fax.Fax()
     # ivr = service.ivr.Ivr()
     # number = service.number.Number()
@@ -26,6 +26,11 @@ class Hoiio(object):
     @staticmethod
     def init(app_id, access_token):
         Hoiio.voice.set_auth(app_id, access_token)
+        Hoiio.sms.set_auth(app_id, access_token)
+        # Hoiio.fax.set_auth(app_id, access_token)
+        # Hoiio.ivr.set_auth(app_id, access_token)
+        # Hoiio.number.set_auth(app_id, access_token)
+        # Hoiio.user.set_auth(app_id, access_token)
 
 
 # url = 'http://www.acme.com/users/details'
@@ -45,6 +50,15 @@ class CallStatus:
     FAILED = 'failed'
     BUSY = 'busy'
     ONGOING = 'ongoing'
+
+class SmsStatus:
+    """ The SMS Status"""
+    QUEUED = 'queued'
+    DELIVERED = 'delivered'
+    FAILED = 'failed'
+    ERROR = 'error'
+    RECEIVED = 'received'
+
 
 
 

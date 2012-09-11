@@ -12,7 +12,7 @@ Makes a voice call back between 2 phone numbers.
 
     res = Hoiio.voice.call('+6511111111', '+6522222222')
 
-There are some optional parameters that you can use as documented in `Hoiio Voice API <http://developer.hoiio.com/docs/voice_call.html>`_. These can be used too, and they must be passed as a dictionary in the payload.
+There are some optional parameters that you can use as documented in `Hoiio Voice API <http://developer.hoiio.com/docs/voice_call.html>`_. These parameters can be passed in as keyword arguments in all of the methods.
 
 .. code-block:: python
 
@@ -39,7 +39,7 @@ Hoiio API response can be accessed as fields of a Response object.
     print res.is_success()
     # True
 
-One of the most import field is txn_ref - a transaction for the API. All chargeable API (eg. making a call back, sending an SMS) will return 1 or more txn_ref. 
+One of the most important field is txn_ref - a transaction for the API. All chargeable API (eg. making a call back, sending an SMS) will return 1 or more txn_ref. 
 
 It is also possible for the API to return unsuccessful. The response status will then return the error code eg. error_invalid_http_method, error_insufficient_credit, error_rate_limit_exceeded, etc. If is_success() returns False, then there must be an error. You might want to log the error, or retry later.
 
@@ -63,7 +63,7 @@ Voice call back connects only 2 phone numbers. As an extension, voice conference
 .. code-block:: python
 
     # Call 3 phones and put them in a conference
-    res = Hoiio.voice.conference('+6511111111,+6522222222,+6533333333')
+    res = Hoiio.voice.conference('+6511111111', '+6522222222', '+6533333333')
     
     # Find out the room id
     print res.room
@@ -122,9 +122,6 @@ You can find out the call status of a particular transaction.
 
     print res.dest2
     # '+6522222222'
-    
-    print res.dest1
-    # 'AA-C-1234'
     
     print res.call_status_dest1
     # 'answered'

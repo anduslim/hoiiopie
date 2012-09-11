@@ -53,25 +53,8 @@ class Response:
         try:
             for key in response.json:
                 value = response.json[key]
-                # We do special handling for certain response keys
-                if key == 'txn_refs':
-                    txn_refs_list = value.split(',')
-                    setattr(self, key, txn_refs_list)
-                if key == 'date':
-                    setattr(self, key, Response.date_from_str(value))
-                elif key == 'entries':
-                    # Turns each entry (a dict) into an object
-                    i = 0
-                    for entry in value:
-                        obj = obj_dic(entry)
-                        value[i] = obj
-                        i += 1
-                    setattr(self, key, value)
-                    # Change date string to datetime
-                    for entry in value:
-                        entry.date = Response.date_from_str(entry.date)
-                else:
-                    setattr(self, key, value)
+                setattr(self, key, sanitize(key, value))
+
         except Exception, e:
             # It is possible that json is empty and throws: TypeError: 'NoneType' object is not iterable
             print 'Exception: %s' % e
@@ -84,24 +67,52 @@ class Response:
             return True
         return False
 
-    @staticmethod
-    def date_from_str(s):
-        # Due to a bug from API, date might have micro sec (after .)
-        if '.' in s:
-            f = "%Y-%m-%d %H:%M:%S.%f"
-        else:
-            f = "%Y-%m-%d %H:%M:%S"
-        return datetime.datetime.strptime(s, f)
+
+
 
 
 def api_endpoint(*args):
-    endpoint = HOIIO_API_ENDPOINT
-    for arg in args:
-        endpoint = endpoint + arg + '/'
-    return endpoint[:-1]
+    """ Returns the Hoiio API endpoint URL. The args are joined by '/'. """
+    endpoint = HOIIO_API_ENDPOINT + '/'.join(args)
+    return endpoint
+    
+
+def sanitize(key, value):
+    """ Return a value (type str) in the correct type (int, float, datetime or str) """
+    
+    # We do special handling for response keys
+    # list (str was delimited by commas)
+    if key == 'txn_refs':
+        return value.split(',')
+    
+    # datetime
+    elif key == 'date':
+        return str_to_date(value)
+
+    # int
+    elif key in ('split_count', 'duration', 'talktime', 'entries_count', 'total_entries_count'):
+        return int(value)
+
+    # float
+    elif key in ('rate', 'total_cost', 'debit'):
+        return float(value)
+
+    # list of objects
+    elif key == 'entries':
+        # Turns each entry (a dict) into an object
+        i = 0
+        for entry in value:
+            obj = obj_dic(entry)
+            value[i] = obj
+            i += 1
+        return value
+
+    else:
+        return value
 
 
 # http://stackoverflow.com/questions/1305532/convert-python-dict-to-object
+# Specially for Hoiio: Added sanitize
 def obj_dic(d):
     top = type('new', (object,), d)
     seqs = tuple, list, set, frozenset
@@ -112,5 +123,25 @@ def obj_dic(d):
             setattr(top, i, 
                     type(j)(obj_dic(sj) if isinstance(sj, dict) else sj for sj in j))
         else:
-            setattr(top, i, j)
+            setattr(top, i, sanitize(i, j))
     return top
+
+
+
+
+# Util methods
+# Maybe move to hoiio module, or utils.py
+def str_to_date(s):
+    """ Converts a string (Hoiio format) to datetime """
+    # Due to a bug from API, date might have micro sec (after .)
+    if '.' in s:
+        f = "%Y-%m-%d %H:%M:%S.%f"
+    else:
+        f = "%Y-%m-%d %H:%M:%S"
+    return datetime.datetime.strptime(s, f)
+
+def date_to_str(d):
+    """ Converts a datetime to string (Hoiio format) """
+    # Due to a bug from API, date might have micro sec (after .)
+    f = "%Y-%m-%d %H:%M:%S"
+    return d.strftime(f)

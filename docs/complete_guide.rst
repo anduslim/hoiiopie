@@ -8,6 +8,7 @@ Go through a complete guide, which shows you all the functionalities that the SD
 
    basics
    voice
+   sms
 
 
 

@@ -3,6 +3,7 @@ import requests
 from hoiio import Hoiio 
 from hoiio.exceptions import HoiioException
 from hoiio.service import Response
+from hoiio.service import str_to_date, date_to_str
 
 class BasicTest(unittest.TestCase):
 
@@ -36,19 +37,29 @@ class BasicTest(unittest.TestCase):
         self.assertRaises(HoiioException, Response, r)
 
 
-    def test_date_from_str(self):
+    def test_str_to_date(self):
 
-        date = Response.date_from_str('2012-01-31 12:06:15.0')
+        date = str_to_date('2012-01-31 12:06:15.0')
         self.assertEqual(date.year, 2012)
         self.assertEqual(date.month, 1)
         self.assertEqual(date.day, 31)
         self.assertEqual(date.second, 15)
 
-        date = Response.date_from_str('2002-01-31 12:06:40')
+        date = str_to_date('2002-01-31 12:06:40')
         self.assertEqual(date.year, 2002)
         self.assertEqual(date.month, 1)
         self.assertEqual(date.day, 31)
         self.assertEqual(date.second, 40)
+        
+    def test_date_to_str(self):
+
+        date = str_to_date('2012-01-31 12:06:15')
+        s = date_to_str(date)
+        self.assertEqual(s, '2012-01-31 12:06:15')
+
+        date = str_to_date('2002-01-31 12:06:40')
+        s = date_to_str(date)
+        self.assertEqual(s, '2002-01-31 12:06:40')
         
 
 

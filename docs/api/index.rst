@@ -1,10 +1,12 @@
-.. automodule:: hoiio.service.voice
+=================
+Modules & Classes
+=================
 
-===========================
-:mod:`hoiio.service.voice`
-===========================
+Documentation for the modules and classes available.
 
-.. autoclass:: Voice
-    :members:
+.. toctree::
+   :maxdepth: 1
 
+   voice
+   sms
 
