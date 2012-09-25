@@ -1,6 +1,7 @@
 import unittest
 import time
 from datetime import datetime
+from credentials import *
 
 from hoiio import Hoiio
 from hoiio import CallStatus
@@ -9,9 +10,8 @@ class CallBackTest(unittest.TestCase):
 
     def setUp(self):
         # Setup Hoiio credentials
-        APP_ID = 'Kej4yXQvnVDUzDmH'
-        ACCESS_TOKEN = 'A7Q88c2UehAAfncP'
-        Hoiio.init(APP_ID, ACCESS_TOKEN)        
+        Hoiio.init(APP_ID, ACCESS_TOKEN)
+     
 
 
     def tearDown(self):
@@ -21,14 +21,14 @@ class CallBackTest(unittest.TestCase):
 
 
     def test_callback(self):
-        res = Hoiio.voice.call(dest1='+6591378000', dest2='+6566028066')
+        res = Hoiio.voice.call(dest1=PHONE_NUMBER_1, dest2=PHONE_NUMBER_2)
         print 'Txn ref: %s' % res.txn_ref
 
         self.assertTrue(res.is_success())
 
     
     def test_callback_with_optionals(self):
-        res = Hoiio.voice.call('+6591378000', '+6566028066',
+        res = Hoiio.voice.call(PHONE_NUMBER_1, PHONE_NUMBER_2,
             caller_id = 'private',
             max_duration = 600,
             tag = 'myapp',
@@ -39,7 +39,7 @@ class CallBackTest(unittest.TestCase):
 
 
     def test_callback_invalid_num(self):
-        res = Hoiio.voice.call(dest1='1234', dest2='+6566028066')
+        res = Hoiio.voice.call(dest1='1234', dest2=PHONE_NUMBER_2)
         
         self.assertFalse(res.is_success())
 
@@ -47,7 +47,7 @@ class CallBackTest(unittest.TestCase):
             print 'Error:', res.status
 
     def test_callback_then_hangup(self):
-        res = Hoiio.voice.call(dest1='+6591378000', dest2='+6566028066')
+        res = Hoiio.voice.call(dest1=PHONE_NUMBER_1, dest2=PHONE_NUMBER_2)
         print 'Txn ref: %s' % res.txn_ref
         self.assertTrue(res.is_success())
  
@@ -66,8 +66,6 @@ class ConferenceTest(unittest.TestCase):
 
     def setUp(self):
         # Setup Hoiio credentials
-        APP_ID = 'Kej4yXQvnVDUzDmH'
-        ACCESS_TOKEN = 'A7Q88c2UehAAfncP'
         Hoiio.init(APP_ID, ACCESS_TOKEN)        
 
 
@@ -78,7 +76,7 @@ class ConferenceTest(unittest.TestCase):
 
 
     def test_conference(self):
-        res = Hoiio.voice.conference('+6591378000', '+6566028066')
+        res = Hoiio.voice.conference(PHONE_NUMBER_1, PHONE_NUMBER_2)
         print 'Txn refs: %s' % res.txn_refs
         print 'Room: %s' % res.room
 
@@ -91,7 +89,7 @@ class ConferenceTest(unittest.TestCase):
 
     def test_conference_with_room(self):
         room_name = 'my.123.abc_room'
-        res = Hoiio.voice.conference('+6591378000', '+6566028066', room=room_name)
+        res = Hoiio.voice.conference(PHONE_NUMBER_1, PHONE_NUMBER_2, room=room_name)
         print 'Txn refs: %s' % res.txn_refs
         print 'Room: %s' % res.room
 
@@ -105,7 +103,7 @@ class ConferenceTest(unittest.TestCase):
 
     def test_conference_then_hangup_1(self):
         # 1) Make the conference call
-        res = Hoiio.voice.conference('+6591378000', '+6566028066')
+        res = Hoiio.voice.conference(PHONE_NUMBER_1, PHONE_NUMBER_2)
         self.assertTrue(res.is_success())
         txn1 = res.txn_refs[0]
         txn2 = res.txn_refs[1]
@@ -119,7 +117,7 @@ class ConferenceTest(unittest.TestCase):
 
     def test_conference_then_hangup_2(self):
         # 1) Make the conference call
-        res = Hoiio.voice.conference('+6591378000', '+6566028066')
+        res = Hoiio.voice.conference(PHONE_NUMBER_1, PHONE_NUMBER_2)
         self.assertTrue(res.is_success())
         txn1 = res.txn_refs[0]
         txn2 = res.txn_refs[1]
@@ -138,10 +136,7 @@ class QueryTest(unittest.TestCase):
 
     def setUp(self):
         # Setup Hoiio credentials
-        APP_ID = 'Kej4yXQvnVDUzDmH'
-        ACCESS_TOKEN = 'A7Q88c2UehAAfncP'
         Hoiio.init(APP_ID, ACCESS_TOKEN)
-        # Hoiio.init('Kej4yXQvnVDUzDmH', 'A7Q88c2UehAAfncP')
 
 
     def tearDown(self):
@@ -149,7 +144,7 @@ class QueryTest(unittest.TestCase):
 
     
     def test_rate(self):
-        res = Hoiio.voice.rate(dest1='+6591378000', dest2='+6566028066')
+        res = Hoiio.voice.rate(dest1=PHONE_NUMBER_1, dest2=PHONE_NUMBER_2)
         print 'Currency: %s' % res.currency
         print 'Rate: %s' % res.rate
         print 'Talktime: %s' % res.talktime
@@ -160,6 +155,7 @@ class QueryTest(unittest.TestCase):
         self.assertTrue(isinstance(res.currency, unicode))
         self.assertTrue(isinstance(res.rate, float))
         self.assertTrue(isinstance(res.talktime, int))
+
 
     def test_history(self):
         res = Hoiio.voice.history()
@@ -198,17 +194,11 @@ class QueryTest(unittest.TestCase):
             
 
     def test_status(self):
-        res = Hoiio.voice.status('AA-C-1805714')
+        res = Hoiio.voice.status(VOICE_STATUS_TX)
         print res.response.text
         
         self.assertTrue(res.is_success())        
-        self.assertEqual('AA-C-1805714', res.txn_ref)
-        self.assertEqual(2012, res.date.year)
-        self.assertEqual(1, res.date.month)
-        self.assertEqual(31, res.date.day)
-        self.assertEqual(12, res.date.hour)
-        self.assertEqual(6, res.date.minute)
-        self.assertEqual(15, res.date.second)
+        self.assertEqual(VOICE_STATUS_TX, res.txn_ref)
         
         print 'txn_ref:\t %s' % res.txn_ref 
         print 'tag:\t %s' % res.tag 

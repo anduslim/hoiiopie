@@ -9,11 +9,9 @@ Install Hoiio Pie from Python Cheeseshop.
 
 	sudo pip install hoiiopie
 
-Hoiio Pie will be installed, together with it's dependencies. Specifically, Hoiio Pie requires these third party packages:
+Hoiio Pie will be installed, together with it's dependencies. There is only 1 dependency:
 
 - `Requests <http://docs.python-requests.org>`_
-- `Sphinx <http://sphinx.pocoo.org>`_
-- `nose <http://nose.readthedocs.org>`_
 
 You do NOT need to install the dependencies since they will be automatically installed with `pip install`. 
 
@@ -38,9 +36,9 @@ Start by initializing the service with your Hoiio credentials (a pair of App ID 
 	# IVR sequence
 	Hoiio.ivr.dial('+6511111111')
 	# After the call is picked up..
-	Hoiio.ivr.gather(session_id, {'1': 'For sales enquiry, please press 1.', '2': 'For technical support, please press 2.'})
+	Hoiio.ivr.gather(session, msg = 'For sales enquiry, please press 1. For technical support, please press 2.')
 	# Finally, hangup the call
-	Hoiio.ivr.hangup(session_id)
+	Hoiio.ivr.hangup(session)
 
 	
 This is *merely* a quick start guide.

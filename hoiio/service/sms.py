@@ -23,7 +23,7 @@ class Sms(Service):
         
         :param sender_name: The sender name that will be displayed to :data:`dest`
         :param tag: Your own reference tag for this transaction
-        :param notify_url: A notification URL for Hoiio to call to your web server
+        :param notify_url: A notification URL for Hoiio to SMS to your web server
         
         :returns: Return :class:`hoiio.service.Response`
         """
@@ -42,7 +42,7 @@ class Sms(Service):
         
         :param sender_name: The sender name that will be displayed to :data:`dest`
         :param tag: Your own reference tag for this transaction
-        :param notify_url: A notification URL for Hoiio to call to your web server
+        :param notify_url: A notification URL for Hoiio to SMS to your web server
         
         :returns: Return :class:`hoiio.service.Response`
         """
@@ -56,8 +56,8 @@ class Sms(Service):
         """
         Retrieve the history of SMS. There is pagination, and each page returns up to 100 entries.
 
-        :param string from: Calls made after this date. In "YYYY-MM-DD HH:MM:SS" (GMT+8) format.
-        :param string to: Calls made before this date. In "YYYY-MM-DD HH:MM:SS" (GMT+8) format.
+        :param string from: SMS sent/received after this date. In "YYYY-MM-DD HH:MM:SS" (GMT+8) format.
+        :param string to: SMS sent/received made before this date. In "YYYY-MM-DD HH:MM:SS" (GMT+8) format.
         :param int page: The page number. Count starts from 1.
         
         :returns: Return :class:`hoiio.service.Response`
@@ -68,16 +68,28 @@ class Sms(Service):
 
     def rate(self, msg, dest, **kwargs):
         """
-        Retrieve the cost of making a call
+        Retrieve the cost of sending an SMS
 
-        :param dest1: The first phone number to call. 
-        :param dest2: The second phont number to call
+        :param msg: The SMS message
+        :param dest: The phone number to send SMS to
         
         :returns: Return :class:`hoiio.service.Response`
         """
-        print 'Call rate from %s [%s]' % (dest, msg)
+        print 'SMS rate from %s [%s]' % (dest, msg)
         kwargs['dest'] = dest
         kwargs['msg'] = msg
+        return self.make_request(api_endpoint('sms', 'get_rate'), **kwargs)
+
+    def rate_in(self, dest, **kwargs):
+        """
+        Retrieve the cost of sending an SMS
+
+        :param dest: The phone number to receive the SMS at
+        
+        :returns: Return :class:`hoiio.service.Response`
+        """
+        print 'SMS rate receiving at %s' % (dest)
+        kwargs['incoming'] = dest
         return self.make_request(api_endpoint('sms', 'get_rate'), **kwargs)
 
 

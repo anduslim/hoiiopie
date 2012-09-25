@@ -1,5 +1,5 @@
 
-SMS API
+SMS
 ==========
 
 ------------------
@@ -42,7 +42,7 @@ The :data:`txn_ref` is a very important field - a transaction for the API. All c
 
 
 -------------------------
-Send bulk (multiple) SMS
+Send bulk SMS
 -------------------------
 
 Bulk SMS API is a convenient extension to `Send an SMS`_. It sends up to 1,000 SMS in a single request. This is useful if you want to send the same message to multiple phone numbers.
@@ -61,6 +61,17 @@ The phone numbers are passed in as variable arguments to the method.
     # 'AA-B-1234'
     
 It is recommended that you make use of :data:`notify_url` to track the status of the individual SMS. The :data:`txn_ref` of the individual SMS will be provided during the notification phase.
+
+
+
+----------------------
+Receive SMS
+----------------------
+
+Hoiio supports `receiving SMS <http://developer.hoiio.com/docs/sms_receive.html>`_. Developers need to purchase an SMS enabled number from Hoiio. At the point of writing (Sep 2012), the only country that has SMS enabled number is the US.
+
+To get a notification from Hoiio whenever you receive an SMS at the number, you will need to go to Hoiio's developer portal and configure the Notify URL, or use the :doc:`Number API <number>` to configure.
+
 
 
 ----------------------

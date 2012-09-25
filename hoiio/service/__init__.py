@@ -3,11 +3,13 @@ import datetime
 
 from hoiio.exceptions import HoiioException
 
-
 HOIIO_API_ENDPOINT = 'https://secure.hoiio.com/open/'
 
 
-class Service:
+class Service(object):
+
+    # Refers back to Hoiio
+    _Hoiio = None
 
     def __init__(self, app_id, access_token):
         setAuth(app_id, access_token)
@@ -24,6 +26,10 @@ class Service:
         for key in kwargs:
             print '%s: %s' % (key, kwargs[key])
 
+        # We add prefix if missing
+        if 'dest' in kwargs:
+            kwargs['dest'] = self.e164_format(kwargs['dest'])
+
         r = requests.get(url, params=kwargs)
         # print 'Response: %s' % r.text
         
@@ -32,6 +38,11 @@ class Service:
     def validate_auth(self):
         if not hasattr(self, 'app_id') or not hasattr(self, 'access_token') or (self.app_id == None) or (self.access_token == None):
             raise HoiioException('App ID and Access Token not init')
+
+    def e164_format(self, phone):
+        if not phone.startswith('+'):
+            phone = '+' + _Hoiio.prefix + phone
+        return phone
 
 
 class Response:
@@ -86,16 +97,23 @@ def sanitize(key, value):
         return value.split(',')
     
     # datetime
-    elif key == 'date':
-        return str_to_date(value)
+    elif key in ('date', 'expiry'):
+        return str_to_date(value, key=key)
 
     # int
     elif key in ('split_count', 'duration', 'talktime', 'entries_count', 'total_entries_count'):
         return int(value)
 
     # float
-    elif key in ('rate', 'total_cost', 'debit'):
+    elif key in ('rate', 'total_cost', 'debit', 'balance', 'points', 'bonus'):
         return float(value)
+
+    # bool
+    elif key in ('auto_extend_status',):
+        if value == 'disabled':
+            return True
+        else:
+            return False
 
     # list of objects
     elif key == 'entries':
@@ -131,10 +149,12 @@ def obj_dic(d):
 
 # Util methods
 # Maybe move to hoiio module, or utils.py
-def str_to_date(s):
+def str_to_date(s, key=None):
     """ Converts a string (Hoiio format) to datetime """
     # Due to a bug from API, date might have micro sec (after .)
-    if '.' in s:
+    if key == 'expiry':
+        f = "%Y-%m-%d"
+    elif '.' in s:
         f = "%Y-%m-%d %H:%M:%S.%f"
     else:
         f = "%Y-%m-%d %H:%M:%S"

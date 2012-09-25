@@ -33,11 +33,11 @@ class Voice(Service):
         return self.make_request(api_endpoint('voice', 'call'), **kwargs)
         
 
-    def conference(self, *args, **kwargs):
+    def conference(self, *dests, **kwargs):
         """
         Call multiple phone numbers and connect them up in a conference call
 
-        :param args: List of phone numbers to call
+        :param dests: List of phone numbers to call
         
         :param string room: The conference room to transfer the callers to
         :param caller_id: The caller ID to show to :data:`dest2`
@@ -47,8 +47,8 @@ class Voice(Service):
         
         :returns: Return :class:`hoiio.service.Response`
         """
-        print 'Conference call to %s' % (args,)
-        kwargs['dest'] = ','.join(args)
+        print 'Conference call to %s' % (dests,)
+        kwargs['dest'] = ','.join(dests)
         return self.make_request(api_endpoint('voice', 'conference'), **kwargs)
 
 

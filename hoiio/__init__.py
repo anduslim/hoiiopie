@@ -1,4 +1,4 @@
-__version_info__ = ('0', '0', '1')
+__version_info__ = ('0', '1', '0')
 __version__ = '.'.join(__version_info__)
 __author__ = 'Junda Ong'
 __author_email__ = 'junda@hoiio.com'
@@ -11,37 +11,39 @@ import service.sms
 import service.fax
 import service.ivr
 import service.number
-import service.user
+import service.account
 
 class Hoiio(object):
 
     # Services as class attributes
     voice = service.voice.Voice()
     sms = service.sms.Sms()
-    # fax = service.fax.Fax()
-    # ivr = service.ivr.Ivr()
-    # number = service.number.Number()
-    # user = service.user.User()
+    number = service.number.Number()
+    fax = service.fax.Fax()
+    ivr = service.ivr.Ivr()
+    account = service.account.Account()
+
+    services = [voice, sms, number, fax, ivr, account]
 
     @staticmethod
     def init(app_id, access_token):
-        Hoiio.voice.set_auth(app_id, access_token)
-        Hoiio.sms.set_auth(app_id, access_token)
-        # Hoiio.fax.set_auth(app_id, access_token)
-        # Hoiio.ivr.set_auth(app_id, access_token)
-        # Hoiio.number.set_auth(app_id, access_token)
-        # Hoiio.user.set_auth(app_id, access_token)
+        for service in Hoiio.services:
+            service.set_auth(app_id, access_token)
+            service._Hoiio = Hoiio
 
+    # Phone number prefix
+    _prefix = '1'
 
-# url = 'http://www.acme.com/users/details'
-# params = urllib.urlencode({
-#   'firstName': 'John',
-#   'lastName': 'Doe'
-# })
-# response = urllib2.urlopen(url, params).read()
-
-
-
+    # http://stackoverflow.com/questions/128573/using-property-on-classmethods
+    class __metaclass__(type):
+        @property
+        def prefix(cls):
+                return cls._prefix
+        @prefix.setter
+        def prefix(cls, value):
+                if value.startswith('+'):
+                    value = value[1:]
+                cls._prefix = value
 
 class CallStatus:
     """ The Call Status"""
@@ -59,6 +61,12 @@ class SmsStatus:
     ERROR = 'error'
     RECEIVED = 'received'
 
-
+class FaxStatus:
+    """ The Fax Status"""
+    ANSWERED = 'answered'
+    UNANSWERED = 'unanswered'
+    FAILED = 'failed'
+    BUSY = 'busy'
+    ONGOING = 'ongoing'
 
 

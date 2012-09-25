@@ -1,8 +1,8 @@
 Python SDK for Hoiio API
 ========================
 
-Refer to ...
+This is a Python SDK for Hoiio API.
 
-http://developer.hoiio.com
+Hoiio API: http://developer.hoiio.com
 
 >> Add Voice & SMS Into Your Apps Easily <<

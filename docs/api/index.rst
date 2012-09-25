@@ -9,4 +9,7 @@ Documentation for the modules and classes available.
 
    voice
    sms
-
+   ivr
+   fax
+   number
+   account

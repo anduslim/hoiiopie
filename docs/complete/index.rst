@@ -1,7 +1,7 @@
 Complete Guide
 ==============
 
-Go through a complete guide, which shows you all the functionalities that the SDK provides.
+Go through the complete guide, which shows you all the functionalities that the SDK provides.
 
 .. toctree::
    :maxdepth: 1
@@ -9,36 +9,26 @@ Go through a complete guide, which shows you all the functionalities that the SD
    basics
    voice
    sms
+   ivr
+   fax
+   number
+   account
 
 
 
+A quick glance of what the SDK offers:
 
-
-
-
----------
-SMS API
----------
-
-Hoiio.sms.send
-Hoiio.sms.bulk_send
-Hoiio.sms.history
-Hoiio.sms.rate
-Hoiio.sms.status
-
----------
-Fax API
----------
+1. SMS
+	1. Hoiio.sms.send
+	2. Hoiio.sms.bulk_send
+	3. Hoiio.sms.history
+	4. Hoiio.sms.rate
+	5. Hoiio.sms.status
 
 Hoiio.fax.send
 Hoiio.fax.history
 Hoiio.fax.rate
 Hoiio.fax.status
-
-
----------
-IVR API
----------
 
 Hoiio.ivr.dial
 Hoiio.ivr.play
@@ -48,20 +38,12 @@ Hoiio.ivr.monitor
 Hoiio.ivr.transfer
 Hoiio.ivr.hangup
 
-----------
-Number API
-----------
-
 Hoiio.number.available_countries
 Hoiio.number.available_numbers
 Hoiio.number.rate
 Hoiio.number.subscribe
 Hoiio.number.configure
 Hoiio.number.active_numbers
-
------------
-Account API
------------
 
 Hoiio.user.balance
 Hoiio.user.info
