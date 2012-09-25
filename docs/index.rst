@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Hoiio Pie Documentation!
+Hoiio SDK
 ============================================
 
-Hoiio Pie [1]_ is an unofficial Python SDK to consume `Hoiio API telephony services <http://developer.hoiio.com>`_.
+This is an unofficial Python SDK to consume `Hoiio API telephony services <http://developer.hoiio.com>`_.
 
 Using the SDK, developers can easily invoke any of `Hoiio RESTful APIs <http://developer.hoiio.com/docs>`_. Start with :doc:`quickstart`, and then proceed to :doc:`complete/index` that includes all the magic that you need to know!
 
@@ -31,6 +31,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-.. [1] Hoiio Pie is Python SDK for Hoiio. Tasty stuff.
 

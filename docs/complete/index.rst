@@ -16,37 +16,58 @@ Go through the complete guide, which shows you all the functionalities that the 
 
 
 
+API Reference
+---------------
+
 A quick glance of what the SDK offers:
 
 1. SMS
-	1. Hoiio.sms.send
-	2. Hoiio.sms.bulk_send
-	3. Hoiio.sms.history
-	4. Hoiio.sms.rate
-	5. Hoiio.sms.status
+   
+   - Hoiio.sms.send
+   - Hoiio.sms.bulk_send
+   - Hoiio.sms.history
+   - Hoiio.sms.rate
+   - Hoiio.sms.status
 
-Hoiio.fax.send
-Hoiio.fax.history
-Hoiio.fax.rate
-Hoiio.fax.status
+2. Voice 
 
-Hoiio.ivr.dial
-Hoiio.ivr.play
-Hoiio.ivr.gather
-Hoiio.ivr.record
-Hoiio.ivr.monitor
-Hoiio.ivr.transfer
-Hoiio.ivr.hangup
+   - Hoiio.voice.call
+   - Hoiio.voice.conference
+   - Hoiio.voice.hangup
+   - Hoiio.voice.history
+   - Hoiio.voice.rate
+   - Hoiio.voice.status
 
-Hoiio.number.available_countries
-Hoiio.number.available_numbers
-Hoiio.number.rate
-Hoiio.number.subscribe
-Hoiio.number.configure
-Hoiio.number.active_numbers
+3. Fax
 
-Hoiio.user.balance
-Hoiio.user.info
+   - Hoiio.fax.send
+   - Hoiio.fax.history
+   - Hoiio.fax.rate
+   - Hoiio.fax.status
+
+4. IVR
+
+   - Hoiio.ivr.dial
+   - Hoiio.ivr.play
+   - Hoiio.ivr.gather
+   - Hoiio.ivr.record
+   - Hoiio.ivr.monitor
+   - Hoiio.ivr.transfer
+   - Hoiio.ivr.hangup
+
+5. Number
+
+   - Hoiio.number.available_countries
+   - Hoiio.number.available_numbers
+   - Hoiio.number.rate
+   - Hoiio.number.subscribe
+   - Hoiio.number.configure
+   - Hoiio.number.active_numbers
+
+6. Account
+
+   - Hoiio.user.balance
+   - Hoiio.user.info
 
 
 

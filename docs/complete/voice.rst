@@ -12,7 +12,7 @@ Makes a voice call back between 2 phone numbers.
 
     res = Hoiio.voice.call('+6511111111', '+6522222222')
 
-There are some optional parameters that you can use as documented in `Hoiio Voice API <http://developer.hoiio.com/docs/voice_call.html>`_. These parameters can be passed in as keyword arguments in all of the methods.
+There are some optional parameters that you can use as documented in `Hoiio Voice API <http://developer.hoiio.com/docs/voice_call.html>`_. These parameters can be passed in as keyword arguments.
 
 .. code-block:: python
 
@@ -23,7 +23,7 @@ There are some optional parameters that you can use as documented in `Hoiio Voic
         notify_url = 'http://my.server.com/myscript'
     )
 
-The example above will call with a private caller ID (shown to dest2), the call will be cut off in 10 minutes (600 sec), tagged with 'myapp' for my own reference, and my script will be notified on the call status.
+The example above will call with a private caller ID (shown only to dest2), the call will be cut off in 10 minutes (600 sec), tagged with 'myapp' for the application reference, and the server's script will be notified on the call status.
 
 We have shown how you can make an API request. But what about handling the response?
 
@@ -39,9 +39,9 @@ Hoiio API response can be accessed as fields of a Response object.
     print res.is_success()
     # True
 
-One of the most important field is txn_ref - a transaction for the API. All chargeable API (eg. making a call back, sending an SMS) will return 1 or more txn_ref. 
+One of the most important field is `txn_ref` - a transaction for the API. All chargeable API (eg. making a call back, sending an SMS) will return 1 or more `txn_ref`. 
 
-It is also possible for the API to return unsuccessful. The response status will then return the error code eg. error_invalid_http_method, error_insufficient_credit, error_rate_limit_exceeded, etc. If is_success() returns False, then there must be an error. You might want to log the error, or retry later.
+It is also possible for the API to return unsuccessful. The response status will then return the error code eg. `error_invalid_http_method`, `error_insufficient_credit`, `error_rate_limit_exceeded`, etc. If `is_success()` returns `False`, then there is an error, and you might want to log the error.
 
 .. code-block:: python
 
@@ -50,7 +50,7 @@ It is also possible for the API to return unsuccessful. The response status will
     if res.is_success():
         print 'The txn ref:', res.txn_ref
     else:
-        # The API failed. Find out the error.
+        # The API failed. Print the error code.
         print 'Error:', res.status
 
 
@@ -88,7 +88,7 @@ It is not neccessary that you supply all the phone numbers in 1 API request. You
 Hangup call
 -------------
 
-You may also at any point in time hangup any of the participant eg. kick him out of the conference room. In the example below, 'TX-4' refers to the txn_ref of +6544444444.
+You may also at any point in time hangup any of the participant eg. kick him out of the conference room. In the example below, 'TX-4' refers to the `txn_ref` of +6544444444.
 
 .. code-block:: python
 
@@ -142,16 +142,15 @@ You can find out the call status of a particular transaction.
     # 0.036
     
 
-There are many information you can get from a call status. Most of the fields are returned as string or int or float. For 'date', a python datetime is returned. Note the datetime is in GMT+8.
+There are many information you can get from a call status. Most of the fields are returned as string or int or float. For 'date', a python datetime is returned. 
+
+.. note::
+
+    All datetime is in GMT+8.
 
 The Call Status can also be used to query for the live status of a call eg. is it still ongoing?
 
 .. code-block:: python
-
-    res = Hoiio.voice.call('+6511111111', '+6522222222')
-
-    print res.txn_ref
-    # 'TX-1234'
 
     res = Hoiio.voice.status('TX-1234')
     
@@ -197,7 +196,18 @@ You could find out how much the call back will cost before you actually make the
 
 .. code-block:: python
 
-    res = Hoiio.voice.rate
+    res = Hoiio.voice.rate('+6511111111', '+6522222222')
+    
+    print res.currency
+    # 'SGD'
+
+    print  res.rate
+    # 0.036
+
+    print res.talktime
+    # 2352
+
+The about call will cost $0.036 (Singapore Dollars), and with the account credit balance, the call can last 2352 minutes.
 
 If you don't want to use API to find out the cost, you could refer to the `Pricing Page <http://developer.hoiio.com/pricing>`_.
 

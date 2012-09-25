@@ -1,13 +1,8 @@
-Python SDK for Hoiio API
+Hoiio SDK for Python
 ========================
 
-This is a Python SDK for Hoiio API.
+This is an SDK for [Hoiio API](http://developer.hoiio.com).
 
-Hoiio API: http://developer.hoiio.com
+Hoiio API is set of telephony API that integrate telephony services - phone calls, conference, IVR (Interactive Voice Responses), Fax and SMS - into your services and website easily.
 
->> Add Voice & SMS Into Your Apps Easily <<
-=======
-hoiiopie
-========
-
-Python SDK for Hoiio
+Read the documentation at http://hoiio.readthedocs.org/

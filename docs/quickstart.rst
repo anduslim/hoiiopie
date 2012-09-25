@@ -3,25 +3,28 @@
 Quick Start
 -----------------
 
-Install Hoiio Pie from Python Cheeseshop.
+Install Hoiio SDK from Python Cheeseshop.
 
 .. code-block:: bash
 
-	sudo pip install hoiiopie
+	sudo pip install hoiio
 
-Hoiio Pie will be installed, together with it's dependencies. There is only 1 dependency:
+The SDK will be installed, together with it's dependencies. There is only 1 dependency:
 
 - `Requests <http://docs.python-requests.org>`_
 
 You do NOT need to install the dependencies since they will be automatically installed with `pip install`. 
 
 
-Start by initializing the service with your Hoiio credentials (a pair of App ID and Access Token). If you have not, register a developer account from `Hoiio <http://developer.hoiio.com>`_ and create an app from the portal. Then make Hoiio API requests!
+Start by initializing the service with your Hoiio credentials (a pair of App ID and Access Token). If you have not, register a developer account from `Hoiio <http://developer.hoiio.com>`_ and create an app from the portal. 
+
+Then make Hoiio API requests like this:
 
 .. code-block:: python
 
 	from hoiio import Hoiio
 
+	# REPLACE WITH YOUR HOIIO CREDENTIALS
 	Hoiio.init('MY_APP_ID', 'MY_ACCESS_TOKEN')
 
 	# Makes a voice call back
@@ -43,4 +46,4 @@ Start by initializing the service with your Hoiio credentials (a pair of App ID 
 	
 This is *merely* a quick start guide.
 
-Refer to :doc:`/complete_guide` for more usage. 
+Refer to :doc:`/complete/index` for detailed usage. 

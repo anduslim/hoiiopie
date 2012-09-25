@@ -7,9 +7,9 @@ Basics
 Setting Up
 ------------
 
-Before you begin, make sure you have already installed the SDK. Refer to :doc:`/quickstart` if you have not. Basically you do a `pip install hoiiopie`.
+Before you begin, make sure you have already installed the SDK. Refer to :doc:`/quickstart` if you have not. Basically you do a `pip install hoiio`.
 
-To use the package, you import :class:`Hoiio` from :mod:`hoiiopie`. 
+To use the package, you import :class:`Hoiio` from :mod:`hoiio`. 
 
 Then initialize the service with your Hoiio credentials (a pair of App ID and Access Token). You can create an app and get the Hoiio credentials by logging in at http://developer.hoiio.com. We use a singleton pattern [1]_ to init the credentials, so you only need to call `init(...)` once.
 
@@ -29,7 +29,7 @@ Then initialize the service with your Hoiio credentials (a pair of App ID and Ac
 Requests
 ---------------
 
-Hoiio Pie is designed to simplify your development.
+Hoiio SDK is designed to simplify your development.
 
 It is designed to be as simple as possible, but no simpler [2]_.
 
@@ -41,11 +41,13 @@ Hence, it has minimal number of classes which you need to know. The most importa
 * Hoiio.ivr.dial(...)
 * Hoiio.ivr.gather(...)
 
-As you can see, the services are categorized as voice, sms, fax, ivr, number and account. This correspond to what `Hoiio API <http://developer.hoiio.com/docs/>` provides.
+As you can see, the services are categorized as voice, sms, fax, ivr, number and account. This correspond to what `Hoiio API <http://developer.hoiio.com/docs/>`_ provides.
 
-The **required parameters** are passed in as positional arguments to the methods.
+The **required parameters** are passed in as **positional arguments** to the methods.
 
-The **optional parameters** are passed in as keyword arguments after the positional arguments.
+The **optional parameters** are passed in as **keyword arguments** after the positional arguments.
+
+Example of a mix of required and optional parameters:
 
 .. code-block:: python
 
@@ -60,7 +62,7 @@ Response
     
 After you make a service request, a :class:`Response` object will be returned.
 
-You can access the fields of the response object. It corresponds to the response parameters in `Hoiio API <http://developer.hoiio.com/docs/>`.
+You can access the fields of the response object. It corresponds to the response parameters in `Hoiio API <http://developer.hoiio.com/docs/>`_.
 
 .. code-block:: python
 
@@ -80,7 +82,9 @@ You can also access additional fields
     print res.json
     # {'txn_ref': 'AA-C-3070102', 'status': 'success_ok'}
 
-Lastly, the SDK uses `Requests <http://docs.python-requests.org>`_, a HTTP python package for Humans. You can access the `Response class <http://docs.python-requests.org/en/latest/user/advanced/#request-and-response-objects>`_, which gives you access to fields like the HTTP headers and status code.
+Lastly, the SDK uses `Requests <http://docs.python-requests.org>`_, a *HTTP python package for Humans*. 
+
+You can access the `Response object <http://docs.python-requests.org/en/latest/user/advanced/#request-and-response-objects>`_, which gives you access to fields like the HTTP headers and status code.
 
 .. code-block:: python
 
@@ -94,6 +98,10 @@ Lastly, the SDK uses `Requests <http://docs.python-requests.org>`_, a HTTP pytho
     'text/html; charset=UTF-8', 'x-cache-lookup': 'HIT from cp1006.eqiad.wmnet:3128,
     MISS from cp1010.eqiad.wmnet:80'}
 
+.. note::
+
+    There are 2 different objects with the same name here. Hoiio returns a response (`res`). Within this `res`, there is a `response` object (`res.response`) provided by `Requests <http://docs.python-requests.org>`_. You usually need not deal with `res.response`, unless you want to access the HTTP raw data.
+
 You can even access the request headers, if you need it.
 
 .. code-block:: python
@@ -101,6 +109,7 @@ You can even access the request headers, if you need it.
     print res.response.request.headers
     # {'Accept-Encoding': 'identity, deflate, compress, gzip',
     'Accept': '*/*', 'User-Agent': 'python-requests/0.13.1'}
+
 
 .. [1] http://en.wikipedia.org/wiki/Singleton_pattern
 .. [2] http://en.wikiquote.org/wiki/Albert_Einstein
