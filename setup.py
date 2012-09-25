@@ -1,4 +1,8 @@
-from hoiio import __version__, __author__, __author_email__
+__version_info__ = ('0', '1', '5')
+__version__ = '.'.join(__version_info__)
+__author__ = 'Junda Ong'
+__author_email__ = 'junda@hoiio.com'
+
 
 import os
 from setuptools import setup, find_packages

@@ -1,8 +1,3 @@
-__version_info__ = ('0', '1', '0')
-__version__ = '.'.join(__version_info__)
-__author__ = 'Junda Ong'
-__author_email__ = 'junda@hoiio.com'
-
 import urllib
 import urllib2
 
