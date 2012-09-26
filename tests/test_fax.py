@@ -78,7 +78,7 @@ class QueryTest(unittest.TestCase):
             print 'fax_status:\t %s' % entry.fax_status 
             print 'src:\t %s' % entry.src
             print 'dest:\t %s' % entry.dest
-            print 'date (year):\t %s' % entry.date.year 
+            print 'date:\t %s' % entry.date 
             print 'fax_pages:\t %s' % entry.fax_pages 
             print 'fax_url:\t %s' % entry.fax_url 
             print 'tag:\t %s' % entry.tag 
@@ -86,13 +86,15 @@ class QueryTest(unittest.TestCase):
             print 'rate:\t %s' % entry.rate 
             print 'debit:\t %s' % entry.debit 
 
-            if entry.fax_status == FaxStatus.ANSWERED:
-                print '>> The Fax was sent!'
-            elif entry.fax_status == FaxStatus.ONGOING:
-                print '>> The Fax is being sent now'
 
-            if entry.src != None:
+            if entry.src == None:
                 print '>> Outgoing Fax'
+                if entry.fax_status == FaxStatus.ANSWERED:
+                    print '>> The Fax was sent!'
+                elif entry.fax_status == FaxStatus.ONGOING:
+                    print '>> The Fax is being sent now'
+            else:
+                print '>> Incoming Fax'
 
         self.assertTrue(res.is_success())        
         

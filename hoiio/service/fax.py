@@ -50,7 +50,11 @@ class Fax(Service):
         :returns: Return :class:`hoiio.service.Response`
         """
         print 'Fax history'
-        return self.make_request(api_endpoint('fax', 'get_history'), **kwargs)
+        res = self.make_request(api_endpoint('fax', 'get_history'), **kwargs)
+        for entry in res.entries:
+            if not hasattr(entry, 'fax_url'):
+                entry.fax_url = None
+        return res
 
 
     def rate(self, dest, **kwargs):
