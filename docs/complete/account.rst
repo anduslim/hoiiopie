@@ -10,11 +10,11 @@ Retrieve credit balance
 
 Hoiio credit balance is made up of:
 
-# Main Points `points`
+1. Main Points (aka `points`)
 
-# Bonus Points `bonus`
+2. Bonus Points (aka `bonus`)
 
-The only difference is that bonus points cannot be transferred to another account. When Hoiio debits, it will take from bonus points first.
+The only difference is that bonus cannot be transferred to another account. When Hoiio debits, it will take from bonus first.
 
 .. code-block:: python
 

@@ -3,13 +3,14 @@ IVR
 
 The IVR APIs are grouped into :
 
-1. Start blocks: Answer, Dial
+1. Start blocks: `Answer`_, `Dial`_
 
-2. Middle blocks: Play, Gather, Record, Monitor
+2. Middle blocks: `Play`_, `Gather`_, `Record`_, `Monitor`_
 
-3. End blocks: Hangup, Transfer
+3. End blocks: `Hangup`_, `Transfer`_
 
 In a call flow, you must start with a Start block, followed by any number of Middle blocks, and lastly end with an End block. For more details, refer to `Hoiio IVR Documentation <http://developer.hoiio.com/docs/ivr.html>`_.
+
 
 
 
@@ -17,7 +18,7 @@ In a call flow, you must start with a Start block, followed by any number of Mid
 Answer
 ------------------------------------
 
-When a call is received on your Hoiio number, your server will receive a notification from Hoiio, and Hoiio expect if you want to answer the call, or ignore. 
+When a call is received on your Hoiio number, your server will receive a notification from Hoiio, and Hoiio expect your action - to answer the call, or ignore. 
 
 Answer is a pseudo API. You don't need to explicitly call it. To answer the call, just use a Middle or End block eg. Play a message or Transfer to another number.
 
@@ -29,27 +30,27 @@ The notification from Hoiio includes a `session`, which is an important data nee
 Dial
 ------------------------------------
 
-Make an outgoing to a number.
+Make an outgoing to a number. 
 
 .. code-block:: python
 
     res = Hoiio.ivr.dial('+6511111111')
 
-    print res.session
-    # 'S4643'
-
     print res.txn_ref
     # 'TX-1234'    
+
+    print res.session
+    # 'S4643'
 
 An advanced use which call a number with a caller ID, plays a message, and set the max duration for the call.
 
 .. code-block:: python
 
     res = Hoiio.ivr.dial('+6511111111',
-    	msg = 'Hello. This is an automated message from Hoiio.',
-    	caller_id = '+6500000000',
-    	max_duration = '60',
-    	tag = 'myapp',
+        msg = 'Hello. This is an automated message from Hoiio.',
+        caller_id = '+6500000000',
+        max_duration = '60',
+        tag = 'myapp',
         notify_url = 'http://my.server.com/myscript'
     )
 
@@ -63,16 +64,17 @@ Play a message over the phone
 
 .. code-block:: python
 
-	session = 'S1234'
     res = Hoiio.ivr.play(session, 'Hello. This is an automated message from Hoiio.',
-		tag = 'myapp',
+        tag = 'myapp',
         notify_url = 'http://my.server.com/myscript'
     )
 
     print res.is_success()
     # True
 
+.. note::
 
+    `session` represents a session of an IVR call. It is an id eg. "S-1234". You could retrieve it from Hoiio notification, or res.session after Dial. 
 
 ------------------------------------
 Gather
@@ -82,13 +84,12 @@ Gather a keypad response over the phone. The following code will ask the user to
 
 .. code-block:: python
 
-	session = 'S1234'
     res = Hoiio.ivr.gather(session, 
-    	msg = 'Hello. Press 1 for yes, press 2 for no.',
-    	max_digits = 1,
-    	timeout = 60,
-    	attempts = 3,
-		tag = 'myapp',
+        msg = 'Hello. Press 1 for yes, press 2 for no.',
+        max_digits = 1,
+        timeout = 60,
+        attempts = 3,
+        tag = 'myapp',
         notify_url = 'http://my.server.com/myscript'
     )
 
@@ -105,11 +106,10 @@ Record a voice message.
 
 .. code-block:: python
 
-	session = 'S1234'
     res = Hoiio.ivr.record(session, 
-    	msg = 'Hello. We are recording your voice message now.',
-    	max_duration = 60,
-		tag = 'myapp',
+        msg = 'Hello. We are recording your voice message now.',
+        max_duration = 60,
+        tag = 'myapp',
         notify_url = 'http://my.server.com/myscript'
     )
 
@@ -126,10 +126,9 @@ Monitor a phone conversation, that is record the whole phone conversation from t
 
 .. code-block:: python
 
-	session = 'S1234'
     res = Hoiio.ivr.monitor(session, 
-    	msg = 'Hello. Note that this phone conversation is recorded.',
-		tag = 'myapp',
+        msg = 'Hello. Note that this phone conversation is recorded.',
+        tag = 'myapp',
         notify_url = 'http://my.server.com/myscript'
     )
 
@@ -146,11 +145,10 @@ Transfer to a phone number or a conference room.
 
 .. code-block:: python
 
-	session = 'S1234'
     res = Hoiio.ivr.transfer(session, '+6522222222'
-    	msg = 'Hello. We will be transferring this call.',
-    	caller_id = '+6500000000',
-    	tag = 'myapp',
+        msg = 'Hello. We will be transferring this call.',
+        caller_id = '+6500000000',
+        tag = 'myapp',
         notify_url = 'http://my.server.com/myscript'
     )
 
@@ -163,12 +161,11 @@ You could revert the Transfer operation by setting `on_failure` to 'continue'. T
 
 .. code-block:: python
 
-	session = 'S1234'
     res = Hoiio.ivr.transfer(session, '+6522222222'
-    	msg = 'Hello. We will be transferring this call.',
-    	caller_id = '+6500000000',
-    	on_failure = 'continue'
-		tag = 'myapp',
+        msg = 'Hello. We will be transferring this call.',
+        caller_id = '+6500000000',
+        on_failure = 'continue'
+        tag = 'myapp',
         notify_url = 'http://my.server.com/myscript'
     )
 
@@ -182,10 +179,9 @@ Hangup a call.
 
 .. code-block:: python
 
-	session = 'S1234'
     res = Hoiio.ivr.monitor(session,
-    	msg = 'Hello. We will be hanging up now. Bye!',
-    	tag = 'myapp',
+        msg = 'Hello. We will be hanging up now. Bye!',
+        tag = 'myapp',
         notify_url = 'http://my.server.com/myscript'
     )
 

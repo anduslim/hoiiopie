@@ -11,7 +11,7 @@ Before you begin, make sure you have already installed the SDK. Refer to :doc:`/
 
 To use the package, you import :class:`Hoiio` from :mod:`hoiio`. 
 
-Then initialize the service with your Hoiio credentials (a pair of App ID and Access Token). You can create an app and get the Hoiio credentials by logging in at http://developer.hoiio.com. We use a singleton pattern [1]_ to init the credentials, so you only need to call `init(...)` once.
+Then initialize the service with your Hoiio credentials (a pair of App ID and Access Token). You can create an app and get the Hoiio credentials by logging in at http://developer.hoiio.com. 
 
 .. code-block:: python
 
@@ -19,9 +19,11 @@ Then initialize the service with your Hoiio credentials (a pair of App ID and Ac
     
     Hoiio.init('MY_APP_ID', 'MY_ACCESS_TOKEN')
 
+We use a singleton pattern [1]_ to init the credentials, so you only need to call `init(...)` once.
+
 .. note:: Obviously, you need to replace MY_APP_ID and MY_ACCESS_TOKEN with YOUR Hoiio credentials. Obtain them from http://developer.hoiio.com.
 
-.. note:: We use a singleton pattern because most of the time, you are using the same set of credentials for your application. However, if you need to use different credentials simultaneously, then you can always override this behaviour by providing the keys `app_id` and `access_token` in the payload.
+.. note:: We use a singleton pattern because most of the time, you are using the same set of credentials for your application. However, if you need to use different credentials simultaneously, you can override this behaviour by providing the keys `app_id` and `access_token` as optional keyword arguments.
 
 
 
@@ -29,7 +31,7 @@ Then initialize the service with your Hoiio credentials (a pair of App ID and Ac
 Requests
 ---------------
 
-Hoiio SDK is designed to simplify your development.
+Hoiio SDK is designed to let you write less code.
 
 It is designed to be as simple as possible, but no simpler [2]_.
 
@@ -70,7 +72,7 @@ You can access the fields of the response object. It corresponds to the response
     # 'TX-1234'
 
 
-You can also access additional fields
+You can also access additional fields.
 
 .. code-block:: python
 

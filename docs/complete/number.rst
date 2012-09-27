@@ -117,19 +117,19 @@ As of Sept 2012:
 
     # Configure for SMS only
     res = Hoiio.number.configure('+16001234567', 
-        foward_to_sms = 'http://my.server.com/myscript'
+        foward_sms_to = 'http://my.server.com/myscript'
     )
 
     # Configure for voice + SMS
     res = Hoiio.number.configure('+16001234567', 
         foward_to = 'http://my.server.com/myscript',
-        foward_to_sms = 'http://my.server.com/myscript',
+        foward_sms_to = 'http://my.server.com/myscript',
     )
 
     # Configure for fax + SMS
     res = Hoiio.number.configure('+16001234567', 
         foward_to = 'http://my.server.com/myscript',
-        foward_to_sms = 'http://my.server.com/myscript',
+        foward_sms_to = 'http://my.server.com/myscript',
         mode = 'fax'
     )
 

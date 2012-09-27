@@ -12,7 +12,7 @@ Makes a voice call back between 2 phone numbers.
 
     res = Hoiio.voice.call('+6511111111', '+6522222222')
 
-There are some optional parameters that you can use as documented in `Hoiio Voice API <http://developer.hoiio.com/docs/voice_call.html>`_. These parameters can be passed in as keyword arguments.
+There are some optional parameters that you can use as documented in `Hoiio Voice API <http://developer.hoiio.com/docs/voice_call.html>`_. These optional parameters can be passed in as keyword arguments.
 
 .. code-block:: python
 

@@ -9,10 +9,13 @@ Clone and Setup
 
 If you want to clone the repos (comes with docs and tests), this is what you do:
 
-	git clone ...
-	sudo pip install -r requirements.txt
-	sudo python setup.py install
+.. code-block:: shell
 
+    git clone ...
+    sudo pip install -r requirements.txt
+    sudo python setup.py install
+
+You can run the test cases using nosetests. Do run the test, you need to rename `credentials-sample.py` to `credentials.py`, and enter the required credentials and details.
 
 --------------------
 Phone Number Format

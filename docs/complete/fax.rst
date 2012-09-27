@@ -104,7 +104,7 @@ Query for all fax transactions. Each of `entry` has similar fields as the respon
         print entry.fax_status
         # etc ..
 
-You can also filter the fax history by date and type of fax (incoming, outgoing or all).
+You can also filter the fax history by date and type (incoming, outgoing or all).
 
 .. code-block:: python
 
