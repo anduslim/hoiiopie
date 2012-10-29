@@ -13,7 +13,7 @@ setup(
     version = __version__,
     author = __author__,
     author_email = __author_email__,
-    description = "Python SDK for Hoiio API",
+    description = "Python SDK for Hoiio API. Refer to http://hoiio.readthedocs.org/ for documentation, https://github.com/samwize/hoiiopie for the repository.",
     license = "MIT",
     keywords = "hoiio voice sms conference fax ivr",
     url = "http://developer.hoiio.com",

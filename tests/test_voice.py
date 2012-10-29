@@ -176,6 +176,8 @@ class QueryTest(unittest.TestCase):
             print 'date:\t %s' % entry.date
             print 'dest1:\t %s' % entry.dest1 
             print 'dest2:\t %s' % entry.dest2
+            if hasattr(entry, 'number'):
+                print 'hoiio#:\t %s' % entry.number
             print 'call_status_dest1:\t %s' % entry.call_status_dest1 
             print 'call_status_dest2:\t %s' % entry.call_status_dest2
             print 'duration:\t %s' % entry.duration

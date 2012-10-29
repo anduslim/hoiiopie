@@ -43,11 +43,23 @@ Retrieve the numbers availabe for purchasing.
         print entry.number
         # '+16001234567'
 
+    # Print the total available
+    print res.total_entries_count
+
+    # Print the total in this page
+    print len(res.entries)
+
 For countries without states, the state argument can be omitted.
 
 .. code-block:: python
 
     res = Hoiio.number.available_numbers('SG')
+
+To access a different page,
+
+.. code-block:: python
+
+    res = Hoiio.number.available_numbers('SG', page=2)
 
 ------------------------------------
 Retrieve number cost

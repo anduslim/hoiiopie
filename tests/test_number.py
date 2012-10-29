@@ -44,7 +44,7 @@ class NumberTest(unittest.TestCase):
         self.assertTrue(isinstance(res.total_entries_count, int))
 
         for entry in res.entries:
-            print entry.number
+            print '%s %s' % (entry.number, entry.capability)
             self.assertTrue(isinstance(entry.number, unicode))
 
 
