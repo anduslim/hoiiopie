@@ -26,11 +26,13 @@ class Service(object):
             if k in kwargs:
                 kwargs[k] = self.e164_format(kwargs[k])
 
-        for key in kwargs:
-            print '%s: %s' % (key, kwargs[key])
+        if self._Hoiio.debuglevel > 0:
+            for key in kwargs:
+                print '%s: %s' % (key, kwargs[key])
 
         r = requests.get(url, params=kwargs)
-        # print 'Response: %s' % r.text
+        if self._Hoiio.debuglevel > 0:
+            print 'Response: %s' % r.text
         
         return Response(r)
 
@@ -67,9 +69,10 @@ class Response:
 
         except Exception, e:
             # It is possible that json is empty and throws: TypeError: 'NoneType' object is not iterable
-            print 'Exception: %s' % e
-            import traceback
-            traceback.print_exc()
+            if self._Hoiio.debuglevel > 0:
+                print 'Exception: %s' % e
+                import traceback
+                traceback.print_exc()
             raise HoiioException
 
     def is_success(self):

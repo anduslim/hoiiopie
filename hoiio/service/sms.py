@@ -27,7 +27,8 @@ class Sms(Service):
         
         :returns: Return :class:`hoiio.service.Response`
         """
-        print 'Sending [%s] to %s' % (msg, dest)
+        if self._Hoiio.debuglevel > 0:
+            print 'Sending [%s] to %s' % (msg, dest)
         kwargs['dest'] = dest
         kwargs['msg'] = msg
         return self.make_request(api_endpoint('sms', 'send'), **kwargs)
@@ -46,7 +47,8 @@ class Sms(Service):
         
         :returns: Return :class:`hoiio.service.Response`
         """
-        print 'Sending [%s] to %s' % (msg, dests)
+        if self._Hoiio.debuglevel > 0:
+            print 'Sending [%s] to %s' % (msg, dests)
         kwargs['dest'] = ','.join(dests)
         kwargs['msg'] = msg
         return self.make_request(api_endpoint('sms', 'bulk_send'), **kwargs)
@@ -62,7 +64,8 @@ class Sms(Service):
         
         :returns: Return :class:`hoiio.service.Response`
         """
-        print 'SMS history'
+        if self._Hoiio.debuglevel > 0:
+            print 'SMS history'
         return self.make_request(api_endpoint('sms', 'get_history'), **kwargs)
 
 
@@ -75,7 +78,8 @@ class Sms(Service):
         
         :returns: Return :class:`hoiio.service.Response`
         """
-        print 'SMS rate from %s [%s]' % (dest, msg)
+        if self._Hoiio.debuglevel > 0:
+            print 'SMS rate from %s [%s]' % (dest, msg)
         kwargs['dest'] = dest
         kwargs['msg'] = msg
         return self.make_request(api_endpoint('sms', 'get_rate'), **kwargs)
@@ -88,7 +92,8 @@ class Sms(Service):
         
         :returns: Return :class:`hoiio.service.Response`
         """
-        print 'SMS rate receiving at %s' % (dest)
+        if self._Hoiio.debuglevel > 0:
+            print 'SMS rate receiving at %s' % (dest)
         kwargs['incoming'] = dest
         return self.make_request(api_endpoint('sms', 'get_rate'), **kwargs)
 
@@ -101,7 +106,8 @@ class Sms(Service):
         
         :returns: Return :class:`hoiio.service.Response`
         """     
-        print 'Status of %s' % (txn_ref)
+        if self._Hoiio.debuglevel > 0:
+            print 'Status of %s' % (txn_ref)
         kwargs['txn_ref'] = txn_ref
         return self.make_request(api_endpoint('sms', 'query_status'), **kwargs)
        

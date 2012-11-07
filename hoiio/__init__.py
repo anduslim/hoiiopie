@@ -26,19 +26,11 @@ class Hoiio(object):
             service.set_auth(app_id, access_token)
             service._Hoiio = Hoiio
 
-    # Phone number prefix
-    _prefix = '1'
-
-    # http://stackoverflow.com/questions/128573/using-property-on-classmethods
-    class __metaclass__(type):
-        @property
-        def prefix(cls):
-                return cls._prefix
-        @prefix.setter
-        def prefix(cls, value):
-                if value.startswith('+'):
-                    value = value[1:]
-                cls._prefix = value
+    # Other configurations
+    # Implicit phone number prefix
+    prefix = '1'
+    # Set debuglevel to 1 to print logs
+    debuglevel = 0
 
 class CallStatus:
     """ The Call Status"""
