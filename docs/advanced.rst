@@ -25,7 +25,7 @@ You would have noticed that all the phone numbers are in full international form
 
 .. code-block:: python
 
-    Hoiio.set_prefix('65')
+    Hoiio.prefix = '65'
     Hoiio.voice.call('11111111', '22222222')
     # Equivalent to Hoiio.voice.call('+6511111111', '+6522222222')
 

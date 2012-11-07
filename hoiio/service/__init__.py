@@ -8,9 +8,6 @@ HOIIO_API_ENDPOINT = 'https://secure.hoiio.com/open/'
 
 class Service(object):
 
-    # Refers back to Hoiio
-    _Hoiio = None
-
     def __init__(self, app_id, access_token):
         setAuth(app_id, access_token)
 
@@ -23,12 +20,14 @@ class Service(object):
 
         kwargs['app_id'] = self.app_id
         kwargs['access_token']  = self.access_token
-        for key in kwargs:
-            print '%s: %s' % (key, kwargs[key])
 
         # We add prefix if missing
-        if 'dest' in kwargs:
-            kwargs['dest'] = self.e164_format(kwargs['dest'])
+        for k in ('dest', 'dest1', 'dest2'):
+            if k in kwargs:
+                kwargs[k] = self.e164_format(kwargs[k])
+
+        for key in kwargs:
+            print '%s: %s' % (key, kwargs[key])
 
         r = requests.get(url, params=kwargs)
         # print 'Response: %s' % r.text
@@ -41,7 +40,7 @@ class Service(object):
 
     def e164_format(self, phone):
         if not phone.startswith('+'):
-            phone = '+' + _Hoiio.prefix + phone
+            phone = '+' + self._Hoiio.prefix + phone
         return phone
 
 

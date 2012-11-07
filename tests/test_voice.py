@@ -61,6 +61,18 @@ class CallBackTest(unittest.TestCase):
 
 
 
+    def test_prefix_call(self):
+        Hoiio.prefix = '65'
+        print 'Prefix:', Hoiio.prefix
+        self.assertEqual(Hoiio.prefix, '65')
+
+        res = Hoiio.voice.call(dest1=PHONE_NUMBER_SHORT, dest2=PHONE_NUMBER_2)
+        print 'Txn ref: %s' % res.txn_ref
+
+        self.assertTrue(res.is_success())
+
+
+
 
 class ConferenceTest(unittest.TestCase):
 
