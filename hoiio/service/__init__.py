@@ -60,11 +60,11 @@ class Response:
         response is from Requests
         """
         self.response = response
-        self.json = response.json
+        self.json = response.json()
         self.text = response.text
         try:
-            for key in response.json:
-                value = response.json[key]
+            for key in response.json():
+                value = response.json()[key]
                 setattr(self, key, sanitize(key, value))
 
         except Exception, e:
