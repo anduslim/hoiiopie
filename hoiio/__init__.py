@@ -1,22 +1,23 @@
 import urllib.request, urllib.parse, urllib.error
 import urllib.request, urllib.error, urllib.parse
 
-from . import service.voice
-from . import service.sms
-from . import service.fax
-from . import service.ivr
-from . import service.number
-from . import service.account
+#from . import service
+from .service import voice as hoiio_voice
+from .service import sms as hoiio_sms
+from .service import fax as hoiio_fax
+from .service import ivr as hoiio_ivr
+from .service import number as hoiio_number
+from .service import account as hoiio_account
 
 class Hoiio(object):
 
     # Services as class attributes
-    voice = service.voice.Voice()
-    sms = service.sms.Sms()
-    number = service.number.Number()
-    fax = service.fax.Fax()
-    ivr = service.ivr.Ivr()
-    account = service.account.Account()
+    voice = hoiio_voice.Voice()
+    sms = hoiio_sms.Sms()
+    number = hoiio_number.Number()
+    fax = hoiio_fax.Fax()
+    ivr = hoiio_ivr.Ivr()
+    account = hoiio_account.Account()
 
     services = [voice, sms, number, fax, ivr, account]
 
