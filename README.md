@@ -1,7 +1,7 @@
 Hoiio SDK for Python 3
 ========================
 
-The purpose of this repository is to update the original author code to support python 2.
+The purpose of this repository is to update the original author code to support python 3.
 
 This is an SDK for [Hoiio API](http://developer.hoiio.com).
 
