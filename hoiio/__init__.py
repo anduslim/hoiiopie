@@ -1,12 +1,12 @@
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 
-import service.voice
-import service.sms
-import service.fax
-import service.ivr
-import service.number
-import service.account
+from . import service.voice
+from . import service.sms
+from . import service.fax
+from . import service.ivr
+from . import service.number
+from . import service.account
 
 class Hoiio(object):
 

@@ -31,8 +31,8 @@ class IvrTest(unittest.TestCase):
         )
 
         self.assertTrue(res.is_success())
-        print 'Session: %s' % res.session
-        print 'Txn ref: %s' % res.txn_ref
+        print('Session: %s' % res.session)
+        print('Txn ref: %s' % res.txn_ref)
         session = res.session
 
 
@@ -48,8 +48,8 @@ class IvrTest(unittest.TestCase):
         )
 
         self.assertTrue(res.is_success())
-        print 'Session: %s' % res.session
-        print 'Txn ref: %s' % res.txn_ref
+        print('Session: %s' % res.session)
+        print('Txn ref: %s' % res.txn_ref)
         session = res.session
 
 

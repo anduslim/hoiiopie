@@ -53,20 +53,20 @@ class BasicTest(unittest.TestCase):
         
 
     def test_prefix(self):
-        print 'Prefix:', Hoiio.prefix
+        print('Prefix:', Hoiio.prefix)
         self.assertEqual(Hoiio.prefix, '1')
 
         Hoiio.prefix = '65'
-        print 'Prefix:', Hoiio.prefix
+        print('Prefix:', Hoiio.prefix)
         self.assertEqual(Hoiio.prefix, '65')
         
         Hoiio.prefix = ''
-        print 'Prefix:', Hoiio.prefix
+        print('Prefix:', Hoiio.prefix)
         self.assertEqual(Hoiio.prefix, '')
 
         # Should remove the +
         Hoiio.prefix = '+86'
-        print 'Prefix:', Hoiio.prefix
+        print('Prefix:', Hoiio.prefix)
         self.assertEqual(Hoiio.prefix, '86')
         
 

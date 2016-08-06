@@ -28,7 +28,7 @@ class Fax(Service):
         :returns: Return :class:`hoiio.service.Response`
         """
         if self._Hoiio.debuglevel > 0:
-            print 'Faxing [%s] to %s' % (filename, dest)
+            print('Faxing [%s] to %s' % (filename, dest))
         f = open(filename, "r")
         data = f.read()
         str_data = base64.b64encode(data)
@@ -51,7 +51,7 @@ class Fax(Service):
         :returns: Return :class:`hoiio.service.Response`
         """
         if self._Hoiio.debuglevel > 0:
-            print 'Fax history'
+            print('Fax history')
         res = self.make_request(api_endpoint('fax', 'get_history'), **kwargs)
         for entry in res.entries:
             if not hasattr(entry, 'fax_url'):
@@ -92,7 +92,7 @@ class Fax(Service):
         :returns: Return :class:`hoiio.service.Response`
         """     
         if self._Hoiio.debuglevel > 0:
-            print 'Status of %s' % (txn_ref)
+            print('Status of %s' % (txn_ref))
         kwargs['txn_ref'] = txn_ref
         return self.make_request(api_endpoint('fax', 'query_status'), **kwargs)
 

@@ -28,11 +28,11 @@ class Service(object):
 
         if self._Hoiio.debuglevel > 0:
             for key in kwargs:
-                print '%s: %s' % (key, kwargs[key])
+                print('%s: %s' % (key, kwargs[key]))
 
         r = requests.get(url, params=kwargs)
         if self._Hoiio.debuglevel > 0:
-            print 'Response: %s' % r.text
+            print('Response: %s' % r.text)
         
         return Response(r)
 
@@ -67,10 +67,10 @@ class Response:
                 value = response.json()[key]
                 setattr(self, key, sanitize(key, value))
 
-        except Exception, e:
+        except Exception as e:
             # It is possible that json is empty and throws: TypeError: 'NoneType' object is not iterable
             if self._Hoiio.debuglevel > 0:
-                print 'Exception: %s' % e
+                print('Exception: %s' % e)
                 import traceback
                 traceback.print_exc()
             raise HoiioException
@@ -136,7 +136,7 @@ def sanitize(key, value):
 def obj_dic(d):
     top = type('new', (object,), d)
     seqs = tuple, list, set, frozenset
-    for i, j in d.items():
+    for i, j in list(d.items()):
         if isinstance(j, dict):
             setattr(top, i, obj_dic(j))
         elif isinstance(j, seqs):

@@ -28,7 +28,7 @@ class Voice(Service):
         :returns: Return :class:`hoiio.service.Response`
         """
         if self._Hoiio.debuglevel > 0:
-            print 'Calling %s to %s' % (dest1, dest2)
+            print('Calling %s to %s' % (dest1, dest2))
         kwargs['dest1'] = dest1
         kwargs['dest2'] = dest2
         return self.make_request(api_endpoint('voice', 'call'), **kwargs)
@@ -49,7 +49,7 @@ class Voice(Service):
         :returns: Return :class:`hoiio.service.Response`
         """
         if self._Hoiio.debuglevel > 0:
-            print 'Conference call to %s' % (dests,)
+            print('Conference call to %s' % (dests,))
         kwargs['dest'] = ','.join(dests)
         return self.make_request(api_endpoint('voice', 'conference'), **kwargs)
 
@@ -63,7 +63,7 @@ class Voice(Service):
         :returns: Return :class:`hoiio.service.Response`
         """
         if self._Hoiio.debuglevel > 0:
-            print 'Hangup %s' % (txn_ref)
+            print('Hangup %s' % (txn_ref))
         kwargs['txn_ref'] = txn_ref
         return self.make_request(api_endpoint('voice', 'hangup'), **kwargs)
 
@@ -79,7 +79,7 @@ class Voice(Service):
         :returns: Return :class:`hoiio.service.Response`
         """
         if self._Hoiio.debuglevel > 0:
-            print 'Call history'
+            print('Call history')
         return self.make_request(api_endpoint('voice', 'get_history'), **kwargs)
 
 
@@ -93,7 +93,7 @@ class Voice(Service):
         :returns: Return :class:`hoiio.service.Response`
         """
         if self._Hoiio.debuglevel > 0:
-            print 'Calling %s to %s' % (dest1, dest2)
+            print('Calling %s to %s' % (dest1, dest2))
         kwargs['dest1'] = dest1
         kwargs['dest2'] = dest2
         return self.make_request(api_endpoint('voice', 'get_rate'), **kwargs)
@@ -108,7 +108,7 @@ class Voice(Service):
         :returns: Return :class:`hoiio.service.Response`
         """     
         if self._Hoiio.debuglevel > 0:
-            print 'Status of %s' % (txn_ref)
+            print('Status of %s' % (txn_ref))
         kwargs['txn_ref'] = txn_ref
         return self.make_request(api_endpoint('voice', 'query_status'), **kwargs)
 
